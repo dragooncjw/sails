@@ -1,0 +1,32 @@
+<h1><%=customer.name%></h1>
+<hr>
+<h3>Email:<%=customer.email%></h3>
+<h4><%=customer.state%></h4>
+
+<hr>
+<h3>Stck</h3>
+<table>
+  <tr>
+    <th>Symbol</th>
+    <th>Number of shares</th>
+    <th>Current Prices</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <%.each(customer.stocks,function (stock) {%>
+    <tr data-id="<%=stock.id%>" data-model="stock">
+      <td><%=stock.symbol%></td>
+      <td><%=stock.number_of_shares%></td>
+      <td></td>
+      <td><a href="/stock/show/<%=stock.id%>">Show</a></td>
+      <td><a href="/stock/edit/<%=stock.id%>">Edit</a></td>
+      <td><a href="/stock/destroy/<%=stock.id%>">Delete</a></td>
+    </tr>
+
+  <%})%>
+</table>
+<form action="/stock/new/" method="post">
+  <input type="hidden" value="<%=customer.id%>" name="owner">
+  <input type="submit" value="add stock">
+</form>
